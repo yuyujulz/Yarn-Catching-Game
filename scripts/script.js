@@ -1,8 +1,30 @@
 
-const canvas = document.getElementById('canvas');
 
-const ctx = canvas.getContext("2d");
+class catchingObjGame {
+    constructor(){
+        this.ctx = null;
+        this.bg = null;
+    }
 
+    startGame(){
+        const canvas = document.getElementById('canvas');
+        this.ctx = canvas.getContext("2d");
+
+        const background = new Image ();
+        background.src = './iron-hack-project/images/shrine.jpg';
+
+        background.onload = () => {
+            this.bg = background;
+        }
+}
+
+updateCanvas() {
+    this.ctx.drawImage(this.bg, 0, 0, )
+
+
+}
+
+}
 //images//
 //let poop = new Image();
 //baguette.src = ;
@@ -25,42 +47,12 @@ const ctx = canvas.getContext("2d");
 
 
 //falling objects//
-class fallingObj {
-    constructor(x, y, ){
-        this.x = x;
-        this.y = y;
-    }
 
-y = Math.floor(Math.random()*744)
 
-draw(x,y) {
-    ctx.clearRect(x, y, 744, 700);
-    if(y > 700){
-        y = 0
-    }
-    ctx.fillStyle = 'white';
-    ctx.fillRect(0, y, 50, 50);
-    y += 3;
-    setTimeout(`draw(${x},${y})`, 30);
-}
 
-update(){
-    this.draw()
-
-}
-}
-//basket//
-
-/*const basket = {
-    x: 372,
-    y: 650,
-    width: 100,
-    hegth: 35,
-    moveLeft: function() {
-        this.x -= 30
-      },
-      moveRight: function() {
-        this.x += 30
-      }
-}
-*/
+window.onload = () => {
+    document.getElementById('start-button').onClick = () => {
+        const game = new catchingObjGame()
+        game.startGame();
+    };
+};

@@ -1,11 +1,12 @@
-/*main page*/
-body {
-    
+/*start page*/
+body {   
     background-color: #F08080;
 }
-h1 {
+.main, .chances {
     color: white;
-    
+    font-family: Helvetica, sans-serif;
+    width: 40%;
+    text-align: center;
 }
 .main img {
     width: 300px;
@@ -15,9 +16,22 @@ h1 {
     background-color: #F08080;
     border: 2px solid white;
     border-radius: 100px;
+
 }
+
+#start-button a {
+     text-decoration: none;
+     color: white;
+     background-image: './images/images.png';
+    
+}
+.button {
+right: 50%
+}
+
 /*gamepage*/
 #canvas {
    
     border: 1px solid white;
 }
+/*game over page*/
