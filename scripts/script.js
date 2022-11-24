@@ -11,7 +11,7 @@ class catchingObjGame {
         this.ctx = canvas.getContext("2d");
 
         const background = new Image ();
-        background.src = './iron-hack-project/images/shrine.jpg';
+        background.src = './firstproject/images/shrine.jpg';
 
         background.onload = () => {
             this.bg = background;
