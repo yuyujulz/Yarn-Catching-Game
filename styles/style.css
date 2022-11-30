@@ -44,7 +44,8 @@ right: 50%
 /*gamepage*/
 #canvas {
     position: relative;
-    border: 5px solid black;
-    background-color: whitesmoke;
+    border: 3px solid rgb(0, 0, 0);
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
 }
 /*game over page*/
