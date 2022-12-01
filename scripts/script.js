@@ -23,7 +23,41 @@ class Basket{
     drawObstacle(){
         ctx.drawImage(this.image, this.x, this.y, this.height, this.width)
     }
-    
+    left() {
+
+        return this.x;
+
+      }
+
+      right() {
+
+        return this.x + this.width;
+
+      }
+
+      top() {
+
+        return this.y;
+
+      }
+
+      bottom() {
+        
+        return this.y + this.height;
+
+      }
+
+      //check the collision with the obstacle
+
+      crashWith(obstacle) {
+        
+        return !(this.bottom() < obstacle.top() || 
+        this.right() < obstacle.left() || 
+        this.left() > obstacle.right());
+
+      }
+
+
     basketMovement(){
     
 
@@ -49,8 +83,9 @@ class Basket{
            
             break;
         }
-       console.log(player.x)
+       
       });
+      
 }
    
  
@@ -80,40 +115,61 @@ function updateFalling(){
     for(let i = 0; i < things.length; i++ ){
         things[i].y += 1 ;
         things[i].drawObstacle();
-        console.log(things)
+        
     }
-    if(frames % 120 === 0){
+    if(frames % 240 === 0){
         let x = game.width;
         let minW = 20;
         let maxW = 730;
         let width = Math.floor(Math.random() * (maxW - minW + 1) + minW);
-        things.push(new Basket(45, 45, drawFallingThings(), width - 10, 0))
+        things.push(new Basket(45, 45, drawFallingThings(), width - 20, 0))
     }
   
 }
 
-function checkCollision(){
+/*function checkCollision(){
+    
     if (
         player.y < things.y + things.h ||
         player.h + player.y > things.y
       ) {
         ++score
+        console.log("inFunction")
         return score
+        
       } else {
-    
+        
         return score
-      }
-}  
+      }*/
+ 
+ function checkGameOver() {
 
+    const crashed = things.some(function (obstacle) {
+
+      return player.crashWith(obstacle);
+
+    });
+
+   
+
+    if (crashed) {
+    
+      return score++
+      
+
+    }
+
+  }
 let score = 0;
 
 function checkScore(){
+    
     if (score < 0)
     {
         clearInterval(update(setInterval))
         ctx.font = ' 70px Comfortaa';
         ctx.fillStyle = 'black';
-        ctx.fillText(`YOU LOSE!!! sad...`, 300, 300)
+        ctx.fillText(`YOU LOSE!!! sad...`, 50, 300)
     }
 }
 
@@ -130,7 +186,7 @@ function update(){
         player.drawBasket()
         //drawFallingThings()
         updateFalling()
-        checkCollision()
+        checkGameOver()
         checkScore()
         scoring()
     },20)
