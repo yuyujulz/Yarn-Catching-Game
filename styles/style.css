@@ -31,7 +31,7 @@ body {
     margin-top: 40px;
 }
 
-#start-button a {
+.button .start-button {
      text-decoration: none;
      color: white;
      background-image: './images/images.png';

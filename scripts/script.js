@@ -53,10 +53,7 @@ class Basket{
       });
 }
    
-  /*   crashWith(obstacle) {
-    return !(this.bottom() < toy.top() || this.top() > obstacle.bottom() || this.right() < obstacle.left() || this.left() > obstacle.right());
-}
-   */ 
+ 
 
 }
 
@@ -90,24 +87,42 @@ function updateFalling(){
         let minW = 20;
         let maxW = 730;
         let width = Math.floor(Math.random() * (maxW - minW + 1) + minW);
-        things.push(new Basket(40, 40, drawFallingThings(), width, 0))
+        things.push(new Basket(45, 45, drawFallingThings(), width - 10, 0))
     }
   
 }
+
 function checkCollision(){
-    let score = 0;
-    if(player.image.y + player.image.height >= toy.y ||
-    player.image.y <= toy.y + toy.height
-    ){
-        return true
-    } else {
-        return false
-    }
+    if (
+        player.y < things.y + things.h ||
+        player.h + player.y > things.y
+      ) {
+        ++score
+        return score
+      } else {
+    
+        return score
+      }
 }  
-function stopGame (){
-    clearInterval(update())
+
+let score = 0;
+
+function checkScore(){
+    if (score < 0)
+    {
+        clearInterval(update(setInterval))
+        ctx.font = ' 70px Comfortaa';
+        ctx.fillStyle = 'black';
+        ctx.fillText(`YOU LOSE!!! sad...`, 300, 300)
+    }
 }
 
+
+  function scoring() {
+    ctx.font = ' 20px Comfortaa';
+    ctx.fillStyle = 'black';
+    ctx.fillText(`Score: ${score}`, 20, 50);
+  }
 
 function update(){
     setInterval(() => {
@@ -115,6 +130,8 @@ function update(){
         player.drawBasket()
         //drawFallingThings()
         updateFalling()
-        //checkCollision()
+        checkCollision()
+        checkScore()
+        scoring()
     },20)
 }
