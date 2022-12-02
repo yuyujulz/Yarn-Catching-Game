@@ -1,7 +1,7 @@
 
 const game = document.getElementById('canvas');
 ctx = canvas.getContext("2d");
-
+let score = 0;
 //const score = document.getElementsByClassName('score')
 
 class Basket{
@@ -25,25 +25,25 @@ class Basket{
     }
     left() {
 
-        return this.y ;
+        return this.x ;
 
       }
 
       right() {
 
-        return this.y + this.height;
+        return this.x + this.width;
 
       }
 
       top() {
 
-        return this.x;
+        return this.y;
 
       }
 
       bottom() {
         
-        return this.width + this.x;
+        return this.y + this.height;
 
       }
 
@@ -51,9 +51,11 @@ class Basket{
 
       crashWith(obstacle) {
         
-        return (this.bottom() < obstacle.top() || 
-        this.right() < obstacle.left() || 
-        this.left() > obstacle.right())
+        return !(this.left() < obstacle.right() &&
+        this.right() > obstacle.left() &&
+        this.top() < obstacle.bottom()&&
+        this.bottom() > obstacle.top())
+         
       }
 
 
@@ -76,8 +78,8 @@ class Basket{
             case 39: 
             
             player.x += 20
-            if (this.x > 630) {
-                this.x = 630;
+            if (this.x > 650) {
+                this.x = 650;
                 }
            
             break;
@@ -116,7 +118,7 @@ function updateFalling(){
         things[i].drawObstacle();
         
     }
-    if(frames % 240 === 0){
+    if(frames % 120 === 0){
         let x = game.width;
         let minW = 20;
         let maxW = 730;
@@ -126,25 +128,10 @@ function updateFalling(){
   
 }
 
-/*function checkCollision(){
-    
-    if (
-        player.y < things.y + things.h ||
-        player.h + player.y > things.y
-      ) {
-        ++score
-        console.log("inFunction")
-        return score
-        
-      } else {
-        
-        return score
-      }*/
  
  function checkGameOver() {
-
     const crashed = things.some(function (obstacle) {
-
+        
       return player.crashWith(obstacle);
 
     });
@@ -156,10 +143,12 @@ function updateFalling(){
       return score++
       
 
+    } else {
+        return score
     }
 
   }
-let score = 0;
+
 
 function checkScore(){
     
@@ -176,14 +165,13 @@ function checkScore(){
   function scoring() {
     ctx.font = ' 20px Comfortaa';
     ctx.fillStyle = 'black';
-    ctx.fillText(`Score: ${score}`, 20, 50);
+    ctx.fillText(`Points: ${score}`, 20, 50);
   }
 
 function update(){
     setInterval(() => {
         ctx.clearRect(0, 0, 744, 700)
         player.drawBasket()
-        //drawFallingThings()
         updateFalling()
         checkGameOver()
         checkScore()
