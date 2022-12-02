@@ -25,25 +25,25 @@ class Basket{
     }
     left() {
 
-        return this.image ;
+        return this.y ;
 
       }
 
       right() {
 
-        return this.image + this.x;
+        return this.y + this.height;
 
       }
 
       top() {
 
-        return this.image ;
+        return this.x;
 
       }
 
       bottom() {
         
-        return this.image + this.y;
+        return this.width + this.x;
 
       }
 
@@ -51,13 +51,9 @@ class Basket{
 
       crashWith(obstacle) {
         
-        if(this.bottom() < obstacle.top() || 
+        return (this.bottom() < obstacle.top() || 
         this.right() < obstacle.left() || 
-        this.left() > obstacle.right()){
-           return score++
-            
-        }
-        
+        this.left() > obstacle.right())
       }
 
 
