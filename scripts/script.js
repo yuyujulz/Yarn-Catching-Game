@@ -15,12 +15,12 @@ class Basket{
         
     }
 
-    drawBasket(){
-        const image = new Image()
+    draw(){
+        /*const image = new Image()
         image.src = 'https://www.pngkey.com/png/full/129-1298935_picnic-baskets-wicker-easter-transprent-png-free-washing.png';
         ctx.drawImage(image, this.x, 600, 100, 90 )
     }
-    drawObstacle(){
+    drawObstacle(){*/
         ctx.drawImage(this.image, this.x, this.y, this.height, this.width)
     }
     left() {
@@ -51,10 +51,10 @@ class Basket{
 
       crashWith(obstacle) {
         
-        return !(this.left() < obstacle.right() &&
-        this.right() > obstacle.left() &&
-        this.top() < obstacle.bottom()&&
-        this.bottom() > obstacle.top())
+        return !(this.left() > obstacle.right() &&
+        this.right() < obstacle.left() &&
+        this.top() > obstacle.bottom()&&
+        this.bottom() < obstacle.top())
          
       }
 
@@ -92,8 +92,9 @@ class Basket{
  
 
 }
-
-const player = new Basket(200,200,100,320)
+const basketImage = new Image()
+basketImage.src = 'https://www.pngkey.com/png/full/129-1298935_picnic-baskets-wicker-easter-transprent-png-free-washing.png';
+const player = new Basket(100,90,basketImage,100,600)
 update()
 player.basketMovement()
 
@@ -104,7 +105,7 @@ const things = [];
 function drawFallingThings(){
     const toy = new Image()
     toy.src = 'https://pic.onlinewebfonts.com/svg/img_74278.png';
-    //ctx.drawImage(toy, 100, 300, 100, 100)
+    
     return toy
 }
 drawFallingThings()
@@ -115,7 +116,7 @@ function updateFalling(){
     frames++
     for(let i = 0; i < things.length; i++ ){
         things[i].y += 1 ;
-        things[i].drawObstacle();
+        things[i].draw();
         
     }
     if(frames % 120 === 0){
@@ -138,7 +139,7 @@ function updateFalling(){
 
    
 
-    if (crashed === true) {
+    if (crashed) {
     
       return score++
       
@@ -172,7 +173,7 @@ function checkScore(){
 function update(){
     setInterval(() => {
         ctx.clearRect(0, 0, 744, 700)
-        player.drawBasket()
+        player.draw()
         updateFalling()
         checkGameOver()
         checkScore()
