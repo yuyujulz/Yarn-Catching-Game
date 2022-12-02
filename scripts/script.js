@@ -8,19 +8,15 @@ class Basket{
     constructor(width,height, image, x, y){
         this.width = width;
         this.height = height;
-        this.image = image;
+        this.image = basketImage;
         this.x = x; 
         this.y = y
         
         
     }
 
-    drawBasket(){
-        const image = new Image()
-        image.src = 'https://www.pngkey.com/png/full/129-1298935_picnic-baskets-wicker-easter-transprent-png-free-washing.png';
-        ctx.drawImage(image, this.x, 600, 100, 90 )
-    }
-    drawObstacle(){
+    draw(){
+        
         ctx.drawImage(this.image, this.x, this.y, this.height, this.width)
     }
     left() {
@@ -92,8 +88,10 @@ class Basket{
  
 
 }
+const basketImage = new Image()
+basketImage.src = 'https://www.pngkey.com/png/full/129-1298935_picnic-baskets-wicker-easter-transprent-png-free-washing.png';
 
-const player = new Basket(200,200,100,320)
+const player = new Basket(100,90,basketImage,100,600)
 update()
 player.basketMovement()
 
@@ -115,7 +113,7 @@ function updateFalling(){
     frames++
     for(let i = 0; i < things.length; i++ ){
         things[i].y += 1 ;
-        things[i].drawObstacle();
+        things[i].draw();
         
     }
     if(frames % 120 === 0){
@@ -171,7 +169,7 @@ function checkScore(){
 function update(){
     setInterval(() => {
         ctx.clearRect(0, 0, 744, 700)
-        player.drawBasket()
+        player.draw()
         updateFalling()
         checkGameOver()
         checkScore()
