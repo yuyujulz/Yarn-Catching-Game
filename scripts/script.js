@@ -95,6 +95,8 @@ class Basket{
 const basketImage = new Image()
 basketImage.src = 'https://www.pngkey.com/png/full/129-1298935_picnic-baskets-wicker-easter-transprent-png-free-washing.png';
 const player = new Basket(100,90,basketImage,100,600)
+
+
 update()
 player.basketMovement()
 
@@ -130,7 +132,7 @@ function updateFalling(){
 }
 
  
- function checkGameOver() {
+ function checkGameOver(obstacle) {
     const crashed = things.some(function (obstacle) {
         
       return player.crashWith(obstacle);
@@ -140,7 +142,7 @@ function updateFalling(){
    
 
     if (crashed) {
-    
+        
       return score++
       
 
