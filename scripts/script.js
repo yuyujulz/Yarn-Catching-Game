@@ -54,10 +54,10 @@ class Basket{
         return !(this.left() > obstacle.right() ||
         this.right() < obstacle.left() ||
         this.top() > obstacle.bottom()||
-        this.bottom() < obstacle.top())
-         
-      
+        this.bottom() < obstacle.top())  
       }
+      
+      
 
     basketMovement(){
     
@@ -124,10 +124,10 @@ function updateFalling(){
     }
     if(frames % 120 === 0){
         let x = game.width;
-        let minW = 20;
-        let maxW = 730;
+        let minW = 30;
+        let maxW = 710;
         let width = Math.floor(Math.random() * (maxW - minW + 1) + minW);
-        things.push(new Basket(45, 45, drawFallingThings(), width - 20, 0))
+        things.push(new Basket(45, 45, drawFallingThings(), width - 30, 0))
     }
   
 }
@@ -139,17 +139,13 @@ function updateFalling(){
       return player.crashWith(obstacle);
 
     });
-   
-
-   
     if(crashed){ 
         things.splice(drawFallingThings(), 1)
         return score++
         
-    } 
-    if(!crashed){
-        return score
-    }
+    }  
+    
+    
 
     /*if (crashed && obstacle.touched)
     {
@@ -165,12 +161,12 @@ function updateFalling(){
 
 function checkScore(){
     
-    if (score < 0)
+    if (score > 20)
     {
         clearInterval(update(setInterval))
         ctx.font = ' 70px Comfortaa';
         ctx.fillStyle = 'black';
-        ctx.fillText(`YOU LOSE!!! sad...`, 50, 300)
+        ctx.fillText(`YOU WIN!!! yey...`, 90, 300)
     }
 }
 
