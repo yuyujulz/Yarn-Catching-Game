@@ -161,7 +161,7 @@ function updateFalling(){
 
 function checkScore(){
     
-    if (score > 20)
+    if (score > 9)
     {
         clearInterval(update(setInterval))
         ctx.font = ' 70px Comfortaa';
