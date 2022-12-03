@@ -51,13 +51,13 @@ class Basket{
 
       crashWith(obstacle) {
         
-        return !(this.left() > obstacle.right() &&
-        this.right() < obstacle.left() &&
-        this.top() > obstacle.bottom()&&
+        return !(this.left() > obstacle.right() ||
+        this.right() < obstacle.left() ||
+        this.top() > obstacle.bottom()||
         this.bottom() < obstacle.top())
          
+      
       }
-
 
     basketMovement(){
     
@@ -94,7 +94,7 @@ class Basket{
 }
 const basketImage = new Image()
 basketImage.src = 'https://www.pngkey.com/png/full/129-1298935_picnic-baskets-wicker-easter-transprent-png-free-washing.png';
-const player = new Basket(100,90,basketImage,100,600)
+const player = new Basket(90,90,basketImage,320,600)
 
 
 update()
@@ -120,6 +120,7 @@ function updateFalling(){
         things[i].y += 1 ;
         things[i].draw();
         
+        
     }
     if(frames % 120 === 0){
         let x = game.width;
@@ -134,25 +135,33 @@ function updateFalling(){
  
  function checkGameOver(obstacle) {
     const crashed = things.some(function (obstacle) {
-        
+      
       return player.crashWith(obstacle);
 
     });
-
    
 
-    if (crashed) {
+   
+    if(crashed){ 
+        things.splice(drawFallingThings(), 1)
+        return score++
         
-      return score++
-      
-
-    } else {
-        
+    } 
+    if(!crashed){
         return score
     }
 
-  }
+    /*if (crashed && obstacle.touched)
+    {
+        obstacle.touched = true
+    score++
+    
+    } else if(crashed && obstacle.touched) {
+        obstacle.touched = false
+        score--
+    }*/
 
+  }
 
 function checkScore(){
     
